@@ -1,80 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101715">
-<title>Globe Express — Discover Somewhere New</title>
-<link rel="preconnect" href="https://images.unsplash.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--white:#f7f7f2;--muted:rgba(255,255,255,.68);--gold:#f4bd50;--ease:cubic-bezier(.22,.75,.18,1)}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;width:100%}
-body{font-family:"DM Sans",sans-serif;background:#101715;color:var(--white);overflow:hidden}
-button{font:inherit;color:inherit}
-.stage{height:100svh;min-height:650px;padding:clamp(18px,4.2vw,64px);display:grid;place-items:center;background:radial-gradient(ellipse at 50% 110%,#28352e 0%,#111a17 55%,#0b100f 100%)}
-.experience{height:min(78vh,760px);min-height:560px;width:min(1440px,100%);position:relative;overflow:hidden;isolation:isolate;box-shadow:0 36px 75px rgba(0,0,0,.55);background:#27352d}
-.experience:before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--hero-image);background-size:cover;background-position:center 52%;transform:scale(1.025);transition:transform 1.2s var(--ease),background-image .5s}
-.experience:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(4,10,8,.62) 0%,rgba(4,10,8,.28) 43%,rgba(4,10,8,.12) 100%),linear-gradient(0deg,rgba(4,10,8,.58),transparent 45%,rgba(4,10,8,.22))}
-.experience[data-scene="0"]{--hero-image:url("https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=2200&q=90")}
-.experience[data-scene="1"]{--hero-image:url("https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=2200&q=90")}
-.experience[data-scene="2"]{--hero-image:url("https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=2200&q=90")}
-.experience[data-scene="3"]{--hero-image:url("https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=2200&q=90")}
-.topbar{position:absolute;z-index:5;left:4.5%;right:4.5%;top:5.2%;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:9px;font-size:10px;font-weight:700;letter-spacing:2.3px;text-transform:uppercase;text-shadow:0 1px 8px #000}
-.logo-mark{height:24px;width:24px;border:1px solid rgba(255,255,255,.75);border-radius:50%;display:grid;place-items:center;font-size:14px}
-.nav{display:flex;align-items:center;gap:clamp(13px,2.2vw,34px)}
-.nav button{border:0;background:none;cursor:pointer;color:rgba(255,255,255,.78);font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
-.nav button:hover,.nav button.active{color:#fff}
-.nav-icons{display:flex;gap:18px;margin-left:12px;font-size:15px}
-.nav-icons button{font-size:16px}
-.hero-copy{position:absolute;left:5%;top:34%;width:min(340px,37%);z-index:2;animation:copyIn .8s var(--ease) both}
-@keyframes copyIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.kicker{font-size:11px;color:#fff;margin-bottom:7px;text-shadow:0 1px 8px #000}
-h1{font-family:Oswald,sans-serif;font-weight:500;text-transform:uppercase;font-size:clamp(44px,5.2vw,76px);line-height:.99;letter-spacing:-1.8px;text-shadow:0 3px 22px rgba(0,0,0,.25);white-space:pre-line}
-.description{max-width:290px;margin-top:14px;color:rgba(255,255,255,.76);font-size:9px;line-height:1.8;text-shadow:0 1px 7px #000}
-.hero-actions{display:flex;align-items:center;gap:15px;margin-top:20px}
-.round-play{width:31px;height:31px;border-radius:50%;border:0;background:var(--gold);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 20px #0005;transition:transform .2s}
-.round-play:hover{transform:scale(1.1)}
-.explore{background:transparent;border:1px solid rgba(255,255,255,.48);border-radius:20px;padding:9px 16px;font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background .2s,border .2s}
-.explore:hover{background:#ffffff24;border-color:#fff}
-.cards{position:absolute;z-index:3;right:5%;top:39%;width:56%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch}
-.destination{height:clamp(190px,27vh,280px);min-height:175px;position:relative;overflow:hidden;border-radius:8px;border:1px solid rgba(255,255,255,.42);cursor:pointer;box-shadow:0 12px 25px rgba(0,0,0,.25);transition:transform .45s var(--ease),height .45s var(--ease),opacity .3s}
-.destination:hover{transform:translateY(-9px)}
-.destination.selected{transform:translateY(-12px);border-color:rgba(255,255,255,.9);box-shadow:0 18px 35px rgba(0,0,0,.38)}
-.destination img{height:100%;width:100%;object-fit:cover;transition:transform .7s var(--ease);filter:saturate(.83)}
-.destination:hover img{transform:scale(1.08)}
-.destination:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.76),transparent 60%)}
-.card-meta{position:absolute;z-index:1;left:12px;right:8px;bottom:13px}
-.card-region{font-size:7px;color:rgba(255,255,255,.8);margin-bottom:5px}
-.card-title{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:clamp(13px,1.4vw,18px);line-height:1.1;font-weight:500}
-.slider-controls{position:absolute;z-index:4;bottom:5.2%;left:44%;display:flex;gap:8px}
-.slider-controls button{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.65);cursor:pointer;font-size:17px;transition:background .2s,transform .2s}
-.slider-controls button:hover{background:rgba(255,255,255,.2);transform:scale(1.06)}
-.counter{position:absolute;z-index:3;right:4.5%;bottom:4.4%;font-family:Oswald,sans-serif;font-size:26px;font-weight:500;text-shadow:0 2px 12px #000}
-.progress{position:absolute;left:5%;top:30%;height:2px;width:13px;background:#fff}
-.toast{position:absolute;z-index:8;left:50%;bottom:7%;transform:translate(-50%,20px);opacity:0;background:rgba(7,13,11,.86);border:1px solid #ffffff33;border-radius:30px;padding:10px 17px;font-size:10px;pointer-events:none;transition:.3s}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.mobile-menu{display:none}
-@media(max-width:900px){
- .experience{height:82vh}.nav{gap:12px}.nav button{font-size:7px}.cards{width:59%;gap:8px}.destination{height:230px}
- .hero-copy{width:38%;top:37%}
-}
-@media(max-width:650px){
- body{overflow:auto}.stage{min-height:100svh;height:auto;padding:12px}
- .experience{height:calc(100svh - 24px);min-height:700px}
- .topbar{top:22px;left:22px;right:22px}.nav{display:none}.mobile-menu{display:block;background:none;border:0;font-size:22px}
- .hero-copy{left:7%;top:18%;width:85%}h1{font-size:58px}.description{font-size:10px;max-width:270px}
- .cards{left:7%;right:7%;top:auto;bottom:17%;width:86%;grid-template-columns:repeat(4, minmax(0,1fr));gap:7px}
- .destination{height:190px;min-height:150px;border-radius:6px}.card-meta{left:7px;bottom:9px}.card-region{font-size:6px}.card-title{font-size:12px}
- .slider-controls{left:7%;bottom:5%}.counter{right:7%;bottom:5%}.progress{top:14%;left:7%}
-}
-@media(max-width:390px){h1{font-size:50px}.destination{height:160px}.cards{bottom:19%}.card-title{font-size:10px}.card-meta{left:5px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-</style>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
 </head>
 <body>
 <div class="stage">
@@ -108,10 +37,6 @@ Antönien</h1>
    <article class="destination" data-index="1" tabindex="0" role="button" aria-label="Select Marrakech, Morocco">
     <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=500&q=85" alt="Warm desert dunes">
     <div class="card-meta"><div class="card-region">Morocco · Desert</div><div class="card-title">Marrakech<br>Merzouga</div></div>
-   </article>
-   <article class="destination" data-index="2" tabindex="0" role="button" aria-label="Select Yosemite, United States">
-    <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=500&q=85" alt="Wild landscape in a national park">
-    <div class="card-meta"><div class="card-region">United States · Nature</div><div class="card-title">Yosemite<br>National Park</div></div>
    </article>
    <article class="destination" data-index="2" tabindex="0" role="button" aria-label="Select Yosemite, United States">
     <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=500&q=85" alt="Wild landscape in a national park">
